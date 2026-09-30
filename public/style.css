@@ -476,6 +476,19 @@ body {
   background: #fffef7;
 }
 
+.column-box.past-column {
+  opacity: 0.52;
+  background: #f1f5f9 !important;
+  border-style: dashed !important;
+  border-color: #cbd5e1 !important;
+  filter: grayscale(20%);
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.column-box.past-column:hover {
+  opacity: 0.85;
+}
+
 .column-header {
   display: flex;
   align-items: center;

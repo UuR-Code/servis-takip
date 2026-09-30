@@ -97,12 +97,38 @@ function initClock() {
 }
 
 // 1-Hour Rule:
-// - Yesterday 23:00 Night Shift (ends at 07:00 today) is marked past after 08:00 (480 min)
-// - Today Sabah Vardiyası (finishes at 15:00) is marked past after 16:00 (960 min)
-// - Today Öğlen Vardiyası (finishes at 23:00) is marked past after 24:00 (1440 min)
+// - Column-level: 15:00 Toplama ends at 15:00 -> dimmed (past-column) after 16:00 (960 min)
+//                 23:00 Dağıtım ends at 23:00 -> dimmed (past-column) after 24:00 (1440 min)
+// - Block-level: When entire shift finishes, mark card past and archive
 function applyOneHourRule(now) {
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
+  // 1. Column-Level Rule (Tek tek Toplama ve Dağıtım kutularını silik yapma):
+  // Dün Gece 23:00 Vardiyası:
+  updateColumnVisibility('yesterday-2300', 'toplama', true);
+  updateColumnVisibility('yesterday-2300', 'dagitim', currentMinutes >= 480);
+
+  // Bugün 07:00 Sabah Vardiyası:
+  // 07:00 Toplama saat 08:00'den (480 dk) sonra silik
+  // 15:00 Dağıtım saat 16:00'dan (960 dk) sonra silik
+  updateColumnVisibility('today-0700', 'toplama', currentMinutes >= 480);
+  updateColumnVisibility('today-0700', 'dagitim', currentMinutes >= 960);
+
+  // Bugün 15:00 Öğlen Vardiyası:
+  // 15:00 Toplama saat 16:00'dan (960 dk) sonra SİLİK!
+  // 23:00 Dağıtım saat 24:00'den (1440 dk) sonra silik (şu an aktif!)
+  updateColumnVisibility('today-1500', 'toplama', currentMinutes >= 960);
+  updateColumnVisibility('today-1500', 'dagitim', currentMinutes >= 1440);
+
+  // Bugün 23:00 Gece Vardiyası:
+  updateColumnVisibility('today-2300', 'toplama', currentMinutes >= 1440);
+  updateColumnVisibility('today-2300', 'dagitim', false);
+
+  // Yarın 07:00 Vardiyası:
+  updateColumnVisibility('tomorrow-0700', 'toplama', false);
+  updateColumnVisibility('tomorrow-0700', 'dagitim', false);
+
+  // 2. Block-Level Rule (Tüm vardiya bittiğinde kartı arşivleme):
   // Yesterday 23:00 night shift (ends at 07:00 today -> past at 08:00 = 480 min)
   const isPastYesterday2300 = currentMinutes >= 480;
   updateShiftBlockVisibility('yesterday-2300', isPastYesterday2300, 'Tamamlandı (07:00)');
@@ -114,6 +140,19 @@ function applyOneHourRule(now) {
   // Today 15:00 shift (ends at 23:00 -> past at 24:00 = 1440 min)
   const isPast1500 = currentMinutes >= 1440;
   updateShiftBlockVisibility('today-1500', isPast1500, 'Tamamlandı (23:00)');
+}
+
+function updateColumnVisibility(blockPrefix, type, isPast) {
+  const block = document.getElementById(`shift-block-${blockPrefix}`);
+  if (!block) return;
+  const col = block.querySelector(`.${type}-box`);
+  if (!col) return;
+
+  if (isPast) {
+    col.classList.add('past-column');
+  } else {
+    col.classList.remove('past-column');
+  }
 }
 
 function updateShiftBlockVisibility(elementId, isPast, pastLabel) {
