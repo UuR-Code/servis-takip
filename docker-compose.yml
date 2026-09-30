@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  servis:
+    build: .
+    container_name: servis-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - servis-data:/app/data
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+
+volumes:
+  servis-data:
+    driver: local

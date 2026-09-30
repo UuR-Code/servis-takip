@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>ServisPlan - Vardiya &amp; Servis Takibi</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400..700;1,400..700&amp;family=Barlow+Condensed:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "on-tertiary": "#ffffff",
+        "surface-container": "#eaedff",
+        "on-tertiary-fixed-variant": "#653e00",
+        "outline-variant": "#bbcabf",
+        "primary-fixed-dim": "#4edea3",
+        "on-background": "#131b2e",
+        "surface": "#faf8ff",
+        "surface-container-high": "#e2e7ff",
+        "tertiary-container": "#e29100",
+        "on-primary-container": "#00422b",
+        "on-surface-variant": "#3c4a42",
+        "primary": "#006c49",
+        "tertiary-fixed": "#ffddb8",
+        "inverse-surface": "#283044",
+        "surface-container-highest": "#dae2fd",
+        "on-error-container": "#93000a",
+        "on-secondary-fixed-variant": "#0039b5",
+        "on-primary-fixed": "#002113",
+        "secondary-fixed-dim": "#b7c4ff",
+        "on-secondary-container": "#fffbff",
+        "primary-fixed": "#6ffbbe",
+        "on-surface": "#131b2e",
+        "on-tertiary-container": "#523200",
+        "on-primary-fixed-variant": "#005236",
+        "secondary-fixed": "#dce1ff",
+        "on-tertiary-fixed": "#2a1700",
+        "primary-container": "#10b981",
+        "secondary": "#1d4ed8",
+        "surface-container-lowest": "#ffffff",
+        "secondary-container": "#4069f2",
+        "outline": "#6c7a71",
+        "on-secondary-fixed": "#001551",
+        "surface-bright": "#faf8ff",
+        "surface-variant": "#dae2fd",
+        "tertiary": "#855300",
+        "on-primary": "#ffffff",
+        "on-secondary": "#ffffff",
+        "error": "#ba1a1a",
+        "inverse-on-surface": "#eef0ff",
+        "error-container": "#ffdad6",
+        "surface-container-low": "#f2f3ff",
+        "surface-dim": "#d2d9f4",
+        "background": "#faf8ff",
+        "on-error": "#ffffff",
+        "inverse-primary": "#4edea3",
+        "tertiary-fixed-dim": "#ffb95f",
+        "surface-tint": "#006c49"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-xl": "1.5rem",
+        "space-xs": "0.25rem",
+        "gutter-tablet": "1rem",
+        "margin-tablet": "1.5rem",
+        "gutter-desktop": "1.5rem",
+        "space-lg": "1rem",
+        "space-md": "0.75rem",
+        "space-sm": "0.5rem",
+        "margin-desktop": "2rem",
+        "margin": "1rem",
+        "gutter": "0.75rem"
+      },
+      "fontFamily": {
+        "headline-sm": ["Barlow Condensed"],
+        "headline-xl-mobile": ["Barlow Condensed"],
+        "body-lg": ["Atkinson Hyperlegible Next"],
+        "body-md": ["Atkinson Hyperlegible Next"],
+        "body-sm": ["Atkinson Hyperlegible Next"],
+        "label-lg": ["Barlow Condensed"],
+        "headline-md": ["Barlow Condensed"],
+        "headline-xl": ["Barlow Condensed"],
+        "label-md": ["Barlow Condensed"],
+        "headline-lg": ["Barlow Condensed"],
+        "label-sm": ["Barlow Condensed"]
+      },
+      "fontSize": {
+        "headline-sm": ["18px", {"lineHeight": "22px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+        "headline-xl-mobile": ["30px", {"lineHeight": "34px", "letterSpacing": "0.02em", "fontWeight": "700"}],
+        "body-lg": ["17px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+        "body-md": ["15px", {"lineHeight": "22px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+        "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.015em", "fontWeight": "400"}],
+        "label-lg": ["16px", {"lineHeight": "20px", "letterSpacing": "0.06em", "fontWeight": "700"}],
+        "headline-md": ["22px", {"lineHeight": "26px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+        "headline-xl": ["40px", {"lineHeight": "44px", "letterSpacing": "0.02em", "fontWeight": "700"}],
+        "label-md": ["14px", {"lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+        "headline-lg": ["28px", {"lineHeight": "32px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700"}]
+      }
+    }
+  }
+}</script><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#faf8ff;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 0.5rem);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style></head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="px-margin flex flex-col justify-between py-2 space-y-2"><div class="flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm"><div class="h-9 w-9 rounded-lg overflow-hidden shrink-0 shadow-sm">https://lh3.googleusercontent.com/aida/AEtjO1VOFl2gPqHCOOqtzBtxmlAdL3DdgSd6_stNATuwtAw38sI1OuLfODr9Ja5B9s-9xpLIu_XuOwAjwI8q8-svLwOxFZiY0mzjjYZxCeVFw1ACZeFAynRkFijdV2JgWBZZzldPfKGxUmN5wHA51e7RDitLoMABzkSVO8qObSXi4AgXcNr8QmJzmzBH_QoR4bCZeocJ9ZwB0D_m5l4BCnc6oPvXSoo9N5XltuTUsN6rQ7sGH-kfbC2_FdpOmZh7</div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md uppercase tracking-wider text-on-surface font-bold">ServisPlan</span><span class="font-label-sm text-label-sm uppercase bg-surface-container-highest text-primary font-bold px-1.5 py-0.5 rounded">Vardiya &amp; Servis Takibi</span></div><span class="font-label-sm text-label-sm uppercase tracking-wide text-on-surface-variant font-semibold">21 Eylül Pazartesi • Canlı Rota</span></div></div><div class="flex items-center gap-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="flex items-center justify-between gap-space-xs"><div class="flex items-center bg-surface-container-low rounded p-0.5"><button class="h-7 px-2.5 flex items-center justify-center font-label-sm text-label-sm uppercase font-bold rounded bg-surface-container-lowest text-on-surface shadow-[0_1px_2px_rgba(0,0,0,0.05)]">Bugün (21 Pzt)</button><button class="h-7 px-2.5 flex items-center justify-center font-label-sm text-label-sm uppercase font-bold rounded text-on-surface-variant hover:text-on-surface">Yarın (22 Sal)</button></div><div class="flex items-center bg-surface-container-low rounded p-0.5"><button class="h-7 px-2 flex items-center gap-1 font-label-sm text-label-sm uppercase font-bold rounded bg-primary text-on-primary"><span class="material-symbols-outlined text-[15px]">local_shipping</span><span>Şoför</span></button><button class="h-7 px-2 flex items-center gap-1 font-label-sm text-label-sm uppercase font-bold rounded text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[15px]">badge</span><span>Personel</span></button></div></div><!-- SHIFT FILTER TABS --><div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-0.5"><button class="filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-primary text-on-primary shadow-xs transition-colors" onclick="filterShifts('all', this)" type="button">Tümü (7 Servis)</button><button class="filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" onclick="filterShifts('shift-0700', this)" type="button">07:00 Vardiyası</button><button class="filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" onclick="filterShifts('shift-1500', this)" type="button">15:00 Vardiyası</button><button class="filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" onclick="filterShifts('shift-2300', this)" type="button">23:00 Vardiyası</button><button class="filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-secondary/15 text-secondary hover:bg-secondary/25 transition-colors flex items-center gap-1" onclick="filterShifts('shift-nextday', this)" type="button"><span class="material-symbols-outlined text-[14px]">wb_sunny</span><span>+ Ertesi Gün 07:00</span></button></div></div></header><main class="flex-1 flex flex-col relative w-full pt-36 pb-32 bg-surface px-margin"><div class="flex flex-col w-full pb-40 space-y-space-md">
+<!-- Telemetry Glance Summary Bar (Toplama & Dağıtım Sayıcıları) -->
+<div class="bg-surface-container-lowest p-2.5 rounded-xl border border-surface-container-high shadow-sm space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">analytics</span>
+<span>Günlük Servis Yolcu Dağılımı</span>
+</span>
+<span class="font-label-sm text-label-sm text-outline uppercase">Toplam 20 Kayıtlı</span>
+</div>
+<div class="grid grid-cols-4 gap-1.5">
+<div class="bg-primary/10 p-1.5 rounded-lg text-center border border-primary/20">
+<span class="font-label-sm text-[11px] text-primary uppercase font-bold block truncate">07:00 Vardiyası</span>
+<div class="flex items-center justify-center gap-1 font-headline-sm text-headline-sm font-bold text-primary leading-tight mt-0.5">
+<span id="badge-summary-toplama-1" title="Toplama">3</span>
+<span class="text-[12px] opacity-60">/</span>
+<span class="text-tertiary" id="badge-summary-dagitim-1" title="Dağıtım">2</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-label-sm">Top / Dağ</span>
+</div>
+<div class="bg-tertiary-container/15 p-1.5 rounded-lg text-center border border-tertiary-container/30">
+<span class="font-label-sm text-[11px] text-tertiary uppercase font-bold block truncate">15:00 Vardiyası</span>
+<div class="flex items-center justify-center gap-1 font-headline-sm text-headline-sm font-bold text-tertiary leading-tight mt-0.5">
+<span id="badge-summary-toplama-2" title="Toplama">2</span>
+<span class="text-[12px] opacity-60">/</span>
+<span id="badge-summary-dagitim-2" title="Dağıtım">3</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-label-sm">Top / Dağ</span>
+</div>
+<div class="bg-surface-container-high p-1.5 rounded-lg text-center border border-outline-variant/40">
+<span class="font-label-sm text-[11px] text-on-surface uppercase font-bold block truncate">23:00 Vardiyası</span>
+<div class="flex items-center justify-center gap-1 font-headline-sm text-headline-sm font-bold text-on-surface leading-tight mt-0.5">
+<span class="text-primary" id="badge-summary-toplama-3" title="Toplama">2</span>
+<span class="text-[12px] opacity-60">/</span>
+<span class="text-tertiary" id="badge-summary-dagitim-3" title="Dağıtım">2</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-label-sm">Top / Dağ</span>
+</div>
+<div class="bg-secondary/10 p-1.5 rounded-lg text-center border border-secondary/30">
+<span class="font-label-sm text-[11px] text-secondary uppercase font-bold block truncate">Ertesi 07:00</span>
+<div class="flex items-center justify-center gap-1 font-headline-sm text-headline-sm font-bold text-secondary leading-tight mt-0.5">
+<span id="badge-summary-dagitim-next" title="Ertesi Gün Dağıtım">2</span>
+</div>
+<span class="text-[10px] text-secondary font-label-sm">Gece Dönüşü</span>
+</div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- 1. VARDİYA (07:00) BÖLÜMÜ -->
+<!-- ============================================================ -->
+<div class="shift-group space-y-space-sm" data-shift-group="shift-0700">
+<div class="flex items-center gap-2 px-1 pt-1">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<h2 class="font-headline-md text-headline-md uppercase font-bold text-on-surface tracking-wide">07:00 Vardiyası</h2>
+<span class="font-label-sm text-label-sm uppercase bg-primary-container/20 text-primary font-bold px-2 py-0.5 rounded-full">Sabah Vardiyası</span>
+</div>
+<!-- 07:00 Toplama (İşe Geliş) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-primary space-y-space-md" id="card-shift-toplama-1">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm uppercase font-bold tracking-wider">
+<span class="material-symbols-outlined text-[15px]">home_work</span>
+<span>Toplama • İşe Geliş (Evden Alma)</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight">07:00 Toplama</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Sabah fabrikaya/ofise geliş • Varış: 07:45</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2.5 py-1 rounded bg-primary text-on-primary font-headline-sm text-headline-sm font-bold" id="badge-count-toplama-1">3 Yolcu</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Kapasite: 16</span>
+</div>
+</div>
+<!-- Passenger List -->
+<div class="space-y-1.5" id="roster-list-toplama-1">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-primary/10 text-primary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">1</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Ahmet Yılmaz</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-primary">pin_drop</span>
+<span>Kadıköy Meydan (06:20)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'toplama-1')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-primary/10 text-primary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">2</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Burak Demir</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-primary">pin_drop</span>
+<span>Acıbadem Köprüsü (06:30)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'toplama-1')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-primary/10 text-primary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">3</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Canan Kaya</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-primary">pin_drop</span>
+<span>Bostancı E-5 (06:40)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'toplama-1')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<button class="w-full h-10 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors active:scale-95" onclick="addSelf('toplama-1', 'Sabah Toplama')" type="button">
+<span class="material-symbols-outlined text-[19px]">person_add</span>
+<span>+ Kendini 07:00 Toplamaya Ekle</span>
+</button>
+</div>
+<!-- 07:00 Dağıtım (Eve Dönüş) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-tertiary space-y-space-md" id="card-shift-dagitim-1">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-tertiary-container/20 text-on-tertiary-container font-label-sm text-label-sm uppercase font-bold tracking-wider">
+<span class="material-symbols-outlined text-[15px]">directions_walk</span>
+<span>Dağıtım • Eve Dönüş (İşten Bırakma)</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight">07:00 Dağıtım</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Gece mesaisinden çıkanların dönüş servisi • Kalkış: 07:15</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2.5 py-1 rounded bg-tertiary-container text-on-tertiary-container font-headline-sm text-headline-sm font-bold" id="badge-count-dagitim-1">2 Yolcu</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Kapasite: 16</span>
+</div>
+</div>
+<!-- Passenger List -->
+<div class="space-y-1.5" id="roster-list-dagitim-1">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">1</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Sinan K.</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-tertiary">location_on</span>
+<span>Maltepe Sahil</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-1')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">2</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Murat Ç.</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-tertiary">location_on</span>
+<span>Göztepe Köprüsü</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-1')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<button class="w-full h-10 rounded-lg bg-tertiary-container/15 hover:bg-tertiary-container/25 text-tertiary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors active:scale-95" onclick="addSelf('dagitim-1', '07:00 Dağıtım')" type="button">
+<span class="material-symbols-outlined text-[19px]">person_add</span>
+<span>+ Kendini 07:00 Dağıtıma Ekle</span>
+</button>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- 2. VARDİYA (15:00) BÖLÜMÜ -->
+<!-- ============================================================ -->
+<div class="shift-group space-y-space-sm pt-2" data-shift-group="shift-1500">
+<div class="flex items-center gap-2 px-1 pt-1">
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary-container"></div>
+<h2 class="font-headline-md text-headline-md uppercase font-bold text-on-surface tracking-wide">15:00 Vardiyası</h2>
+<span class="font-label-sm text-label-sm uppercase bg-tertiary-container/20 text-tertiary font-bold px-2 py-0.5 rounded-full">Gündüz / Akşam Vardiyası</span>
+</div>
+<!-- 15:00 Toplama (İşe Geliş) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-primary space-y-space-md" id="card-shift-toplama-2">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm uppercase font-bold tracking-wider">
+<span class="material-symbols-outlined text-[15px]">home_work</span>
+<span>Toplama • İşe Geliş (Evden Alma)</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight">15:00 Toplama</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Öğlen mesaisine evden gelenler • Varış: 14:45</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2.5 py-1 rounded bg-primary text-on-primary font-headline-sm text-headline-sm font-bold" id="badge-count-toplama-2">2 Yolcu</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Kapasite: 16</span>
+</div>
+</div>
+<!-- Passenger List -->
+<div class="space-y-1.5" id="roster-list-toplama-2">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-primary/10 text-primary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">1</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Serkan A.</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-primary">pin_drop</span>
+<span>Kartal Metro (14:15)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'toplama-2')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-primary/10 text-primary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">2</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Derya M.</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-primary">pin_drop</span>
+<span>Pendik Köprüsü (14:25)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'toplama-2')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<button class="w-full h-10 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors active:scale-95" onclick="addSelf('toplama-2', '15:00 Toplama')" type="button">
+<span class="material-symbols-outlined text-[19px]">person_add</span>
+<span>+ Kendini 15:00 Toplamaya Ekle</span>
+</button>
+</div>
+<!-- 15:00 Dağıtım (Eve Dönüş) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-tertiary space-y-space-md" id="card-shift-dagitim-2">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-tertiary-container/20 text-on-tertiary-container font-label-sm text-label-sm uppercase font-bold tracking-wider">
+<span class="material-symbols-outlined text-[15px]">work_history</span>
+<span>Dağıtım • Eve Dönüş (İşten Bırakma)</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight">15:00 Dağıtım</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">07:00 - 15:00 vardiyasından çıkanlar • Kalkış: 15:10</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2.5 py-1 rounded bg-tertiary-container text-on-tertiary-container font-headline-sm text-headline-sm font-bold" id="badge-count-dagitim-2">3 Yolcu</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Kapasite: 16</span>
+</div>
+</div>
+<!-- Passenger List -->
+<div class="space-y-1.5" id="roster-list-dagitim-2">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">1</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Burak Demir</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-tertiary">location_on</span>
+<span>Acıbadem</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-2')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">2</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Ahmet Y.</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-tertiary">location_on</span>
+<span>Kadıköy</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-2')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">3</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Seda A.</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-tertiary">location_on</span>
+<span>Maltepe Köprüsü</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-2')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<button class="w-full h-10 rounded-lg bg-tertiary-container/15 hover:bg-tertiary-container/25 text-tertiary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors active:scale-95" onclick="addSelf('dagitim-2', '15:00 Dağıtım')" type="button">
+<span class="material-symbols-outlined text-[19px]">person_add</span>
+<span>+ Kendini 15:00 Dağıtıma Ekle</span>
+</button>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- 3. VARDİYA (23:00) BÖLÜMÜ -->
+<!-- ============================================================ -->
+<div class="shift-group space-y-space-sm pt-2" data-shift-group="shift-2300">
+<div class="flex items-center gap-2 px-1 pt-1">
+<div class="w-2.5 h-2.5 rounded-full bg-inverse-surface"></div>
+<h2 class="font-headline-md text-headline-md uppercase font-bold text-on-surface tracking-wide">23:00 Vardiyası</h2>
+<span class="font-label-sm text-label-sm uppercase bg-surface-container-high text-on-surface font-bold px-2 py-0.5 rounded-full">Gece Vardiyası</span>
+</div>
+<!-- 23:00 Toplama (İşe Geliş) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-primary space-y-space-md" id="card-shift-toplama-3">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm uppercase font-bold tracking-wider">
+<span class="material-symbols-outlined text-[15px]">dark_mode</span>
+<span>Toplama • İşe Geliş (Gece Başlangıcı)</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight">23:00 Toplama</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Gece vardiyasına başlayanlar • Varış: 22:45</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2.5 py-1 rounded bg-primary text-on-primary font-headline-sm text-headline-sm font-bold" id="badge-count-toplama-3">2 Yolcu</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Kapasite: 16</span>
+</div>
+</div>
+<!-- Passenger List -->
+<div class="space-y-1.5" id="roster-list-toplama-3">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-primary/10 text-primary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">1</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Volkan Ak</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-primary">pin_drop</span>
+<span>Kartal Köprüsü (22:15)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'toplama-3')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-primary/10 text-primary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">2</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Onur Güler</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-primary">pin_drop</span>
+<span>Pendik Sahil (22:25)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'toplama-3')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<button class="w-full h-10 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors active:scale-95" onclick="addSelf('toplama-3', '23:00 Toplama')" type="button">
+<span class="material-symbols-outlined text-[19px]">person_add</span>
+<span>+ Kendini 23:00 Toplamaya Ekle</span>
+</button>
+</div>
+<!-- 23:00 Dağıtım (Eve Dönüş) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm border-l-4 border-l-tertiary space-y-space-md" id="card-shift-dagitim-3">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-tertiary-container/20 text-on-tertiary-container font-label-sm text-label-sm uppercase font-bold tracking-wider">
+<span class="material-symbols-outlined text-[15px]">bedtime</span>
+<span>Dağıtım • Eve Dönüş (İşten Bırakma)</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight">23:00 Dağıtım</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">15:00 - 23:00 mesaisinden çıkanlar • Kalkış: 23:15</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2.5 py-1 rounded bg-tertiary-container text-on-tertiary-container font-headline-sm text-headline-sm font-bold" id="badge-count-dagitim-3">2 Yolcu</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Kapasite: 16</span>
+</div>
+</div>
+<!-- Passenger List -->
+<div class="space-y-1.5" id="roster-list-dagitim-3">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">1</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Deniz Arslan</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-tertiary">location_on</span>
+<span>Kartal Metro</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-3')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">2</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Zeynep Şen</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-tertiary">location_on</span>
+<span>Pendik Köprüsü</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-3')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<button class="w-full h-10 rounded-lg bg-tertiary-container/15 hover:bg-tertiary-container/25 text-tertiary font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors active:scale-95" onclick="addSelf('dagitim-3', '23:00 Dağıtım')" type="button">
+<span class="material-symbols-outlined text-[19px]">person_add</span>
+<span>+ Kendini 23:00 Dağıtıma Ekle</span>
+</button>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- ÖZEL İSTEK KARTI: ERTESİ GÜN SABAH 07:00 DAĞITIM (EVE DÖNÜŞ) -->
+<!-- ============================================================ -->
+<div class="shift-group space-y-space-sm pt-2" data-shift-group="shift-nextday">
+<div class="bg-gradient-to-r from-secondary-container/10 via-secondary-container/5 to-surface-container-highest/60 p-3 rounded-2xl border-2 border-secondary/30 shadow-sm space-y-space-md" id="card-shift-dagitim-next">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="space-y-1.5">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm uppercase font-bold tracking-wider shadow-xs">
+<span>🌙 23:00 Vardiyası Sabah Çıkışı - 22 Eylül Salı</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold leading-tight flex items-center gap-2">
+<span>Ertesi Gün 07:00 Dağıtım</span>
+<span class="material-symbols-outlined text-secondary text-[22px]">wb_twilight</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+          23:00'da gelenlerin ertesi sabah (22 Eyl) işten çıkış ve eve dönüş servisi • Kalkış: 07:15
+        </div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="px-2.5 py-1 rounded bg-secondary text-on-secondary font-headline-sm text-headline-sm font-bold" id="badge-count-dagitim-next">2 Yolcu</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold mt-0.5">Ertesi Sabah</span>
+</div>
+</div>
+<!-- Info banner for 23:00 workers -->
+<div class="bg-surface-container-lowest/80 p-2.5 rounded-lg border border-secondary/20 flex items-center gap-2 text-xs text-on-surface-variant font-body-sm">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0">info</span>
+<span>23:00 vardiyasına gelen personel sabah mesai bitiminde bu araçla dönecektir. Kendinizi şimdiden ekleyebilirsiniz.</span>
+</div>
+<!-- Passenger List -->
+<div class="space-y-1.5" id="roster-list-dagitim-next">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest shadow-xs hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-secondary/15 text-secondary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">1</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Volkan Ak</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-secondary">location_on</span>
+<span>Kartal Köprüsü (22 Eyl Salı 07:15 Çıkış)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-next')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-lowest shadow-xs hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-7 h-7 rounded bg-secondary/15 text-secondary font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">2</div>
+<div class="min-w-0">
+<div class="font-body-lg text-body-lg text-on-surface font-bold truncate">Onur Güler</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+<span class="material-symbols-outlined text-[13px] text-secondary">location_on</span>
+<span>Pendik Sahil (22 Eyl Salı 07:15 Çıkış)</span>
+</div>
+</div>
+</div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" onclick="removeRosterItem(this, 'dagitim-next')" title="Kaldır" type="button"><span class="material-symbols-outlined text-[18px]">close</span></button>
+</div>
+</div>
+<!-- Quick Self Add Button -->
+<button class="w-full h-11 rounded-lg bg-secondary text-on-secondary hover:bg-secondary/90 font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 transition-transform active:scale-95 shadow-sm" onclick="addSelf('dagitim-next', 'Ertesi Gün 07:00 Dağıtım')" type="button">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>+ Ertesi Sabah (07:00) Eve Dönüşe Kendini Ekle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- FIXED BOTTOM DOCK: Quick 1-Tap Name Selector Section -->
+<aside class="fixed bottom-16 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md px-margin py-2 shadow-[0_-4px_16px_rgba(0,0,0,0.08)] border-t border-outline-variant/30">
+<div class="max-w-xl mx-auto space-y-1.5">
+<!-- Target Shift Radio Selector -->
+<div class="flex items-center justify-between gap-1 overflow-x-auto pb-0.5 no-scrollbar">
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface-variant shrink-0 mr-1">Hedef:</span>
+<div class="flex items-center gap-1 shrink-0">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="target-shift" onchange="setTargetShift('toplama-1')" type="radio" value="toplama-1"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm uppercase font-bold bg-surface-container-high text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary transition-colors inline-block">07:00 Topla</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="target-shift" onchange="setTargetShift('dagitim-1')" type="radio" value="dagitim-1"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm uppercase font-bold bg-surface-container-high text-on-surface-variant peer-checked:bg-tertiary-container peer-checked:text-on-tertiary-container transition-colors inline-block">07:00 Dağıt</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="target-shift" onchange="setTargetShift('toplama-2')" type="radio" value="toplama-2"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm uppercase font-bold bg-surface-container-high text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary transition-colors inline-block">15:00 Topla</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="target-shift" onchange="setTargetShift('dagitim-2')" type="radio" value="dagitim-2"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm uppercase font-bold bg-surface-container-high text-on-surface-variant peer-checked:bg-tertiary-container peer-checked:text-on-tertiary-container transition-colors inline-block">15:00 Dağıt</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="target-shift" onchange="setTargetShift('toplama-3')" type="radio" value="toplama-3"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm uppercase font-bold bg-surface-container-high text-on-surface-variant peer-checked:bg-primary peer-checked:text-on-primary transition-colors inline-block">23:00 Topla</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="target-shift" onchange="setTargetShift('dagitim-3')" type="radio" value="dagitim-3"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm uppercase font-bold bg-surface-container-high text-on-surface-variant peer-checked:bg-tertiary-container peer-checked:text-on-tertiary-container transition-colors inline-block">23:00 Dağıt</span>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="target-shift" onchange="setTargetShift('dagitim-next')" type="radio" value="dagitim-next"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-label-sm uppercase font-bold bg-surface-container-high text-secondary peer-checked:bg-secondary peer-checked:text-on-secondary transition-colors inline-block">Ertesi 07:00</span>
+</label>
+</div>
+</div>
+<!-- Quick Name Selector Pill Stream -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm uppercase font-bold text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">touch_app</span>
+<span>Hızlı İsim Ekle (Dokun ve Hedefe Ekle)</span>
+</span>
+<span class="font-label-sm text-[11px] text-outline">Seçili Hedefe Ekler</span>
+</div>
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Ahmet Y.', 'Kadıköy')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Ahmet Y.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Ayşe K.', 'Ataşehir')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Ayşe K.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Burak D.', 'Acıbadem')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Burak D.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Canan K.', 'Bostancı')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Canan K.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Deniz A.', 'Kartal')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Deniz A.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Sinan K.', 'Maltepe')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Sinan K.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Murat Ç.', 'Göztepe')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Murat Ç.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Serkan A.', 'Pendik')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Serkan A.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Volkan A.', 'Kartal Köprüsü')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Volkan A.</span>
+</button>
+<button class="h-7 px-2.5 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm uppercase font-bold flex items-center gap-1 shrink-0 active:scale-90 hover:bg-primary-container hover:text-on-primary-container transition-all shadow-2xs" onclick="quickAddPerson('Onur G.', 'Pendik Sahil')" type="button">
+<span class="material-symbols-outlined text-[13px]">add</span>
+<span>Onur G.</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<script>
+  let activeTargetKey = 'toplama-1';
+
+  function setTargetShift(key) {
+    activeTargetKey = key;
+  }
+
+  function filterShifts(filterKey, btn) {
+    // Tab active styling
+    const tabs = document.querySelectorAll('.filter-tab-btn');
+    tabs.forEach(t => {
+      t.className = 'filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors';
+    });
+    if (filterKey === 'shift-nextday') {
+      btn.className = 'filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-secondary text-on-secondary shadow-xs transition-colors flex items-center gap-1';
+    } else {
+      btn.className = 'filter-tab-btn px-2.5 py-1 rounded-full font-label-sm text-label-sm uppercase font-bold shrink-0 bg-primary text-on-primary shadow-xs transition-colors';
+    }
+
+    // Toggle Groups
+    const groups = document.querySelectorAll('.shift-group');
+    groups.forEach(g => {
+      if (filterKey === 'all' || g.getAttribute('data-shift-group') === filterKey) {
+        g.style.display = 'block';
+      } else {
+        g.style.display = 'none';
+      }
+    });
+  }
+
+  function updateCounts(targetKey) {
+    const list = document.getElementById(`roster-list-${targetKey}`);
+    if (!list) return;
+    const count = list.children.length;
+
+    // Card Badge
+    const cardBadge = document.getElementById(`badge-count-${targetKey}`);
+    if (cardBadge) cardBadge.innerText = `${count} Yolcu`;
+
+    // Summary Bar Counters
+    const summaryBadge = document.getElementById(`badge-summary-${targetKey}`);
+    if (summaryBadge) summaryBadge.innerText = count;
+
+    // Renumber
+    const items = list.children;
+    for (let i = 0; i < items.length; i++) {
+      const numElem = items[i].querySelector('div > div:first-child');
+      if (numElem) numElem.innerText = i + 1;
+    }
+  }
+
+  function removeRosterItem(btn, targetKey) {
+    const row = btn.closest('div.flex');
+    if (row) {
+      row.style.opacity = '0';
+      row.style.transform = 'translateX(20px)';
+      row.style.transition = 'all 0.2s ease-out';
+      setTimeout(() => {
+        row.remove();
+        updateCounts(targetKey);
+      }, 200);
+    }
+  }
+
+  function addPassenger(targetKey, name, location) {
+    const list = document.getElementById(`roster-list-${targetKey}`);
+    if (!list) return;
+
+    const count = list.children.length + 1;
+    const isToplama = targetKey.startsWith('toplama');
+    const isNextDay = targetKey === 'dagitim-next';
+
+    let badgeClass = isToplama 
+      ? 'bg-primary/10 text-primary' 
+      : (isNextDay ? 'bg-secondary/15 text-secondary' : 'bg-tertiary-container/20 text-tertiary');
+    let iconColor = isToplama 
+      ? 'text-primary' 
+      : (isNextDay ? 'text-secondary' : 'text-tertiary');
+    let iconName = isToplama ? 'pin_drop' : 'location_on';
+
+    const item = document.createElement('div');
+    item.className = 'flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-all transform translate-y-1 opacity-0';
+    item.innerHTML = `
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-7 h-7 rounded ${badgeClass} font-label-sm text-label-sm flex items-center justify-center font-bold shrink-0">${count}</div>
+        <div class="min-w-0">
+          <div class="font-body-lg text-body-lg text-on-surface font-bold truncate">${name}</div>
+          <div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 truncate">
+            <span class="material-symbols-outlined text-[13px] ${iconColor}">${iconName}</span>
+            <span>${location}</span>
+          </div>
+        </div>
+      </div>
+      <button type="button" onclick="removeRosterItem(this, '${targetKey}')" class="w-8 h-8 rounded flex items-center justify-center text-outline hover:text-error active:scale-90 transition-all shrink-0" title="Kaldır">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    `;
+
+    list.appendChild(item);
+    requestAnimationFrame(() => {
+      item.style.opacity = '1';
+      item.style.transform = 'translateY(0)';
+    });
+
+    updateCounts(targetKey);
+
+    const card = document.getElementById(`card-shift-${targetKey}`);
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  function quickAddPerson(name, location) {
+    addPassenger(activeTargetKey, name, location);
+  }
+
+  function addSelf(targetKey, label) {
+    addPassenger(targetKey, 'Ben (Kullanıcı)', 'Kayıtlı Durak');
+  }
+</script>
+</main>
+<nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)]" data-active-classes="bg-primary text-on-primary">
+<div class="flex items-center justify-around h-16 px-space-md">
+<a aria-current="page" class="flex-1 flex items-center justify-center gap-2 h-11 rounded transition-colors font-label-md uppercase tracking-wider bg-primary text-on-primary" data-path="vardiya-listesi" href="#">
+<span class="material-symbols-outlined text-[20px]">view_timeline</span>
+<span>Vardiya Listesi</span>
+</a>
+<a class="flex-1 flex items-center justify-center gap-2 h-11 rounded transition-colors text-on-surface-variant font-label-md text-label-md uppercase tracking-wider" data-path="hizli-isim-ekleme" href="#">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span>Hızlı İsim Ekle</span>
+</a>
+</div>
+</nav>
+</body></html>

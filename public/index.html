@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="theme-color" content="#0284c7" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Telekom Servis" />
+  <title>Telekom Servis</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,0,0" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=23">
+</head>
+<body>
+
+  <!-- 📲 PWA Telefona Kısayol Ekle Banner -->
+  <div class="pwa-install-banner" id="pwa-banner">
+    <div class="pwa-banner-left">
+      <span class="pwa-icon">📲</span>
+      <div class="pwa-info">
+        <span class="pwa-title">Telefona Kısayol Ekle</span>
+        <span class="pwa-sub">Uygulama gibi tek dokunuşla açın (Telekom Servis)</span>
+      </div>
+    </div>
+    <div class="pwa-banner-actions">
+      <button type="button" class="pwa-btn-install" onclick="triggerPwaInstall()">Ekle</button>
+      <button type="button" class="pwa-btn-dismiss" onclick="dismissPwaBanner()">✕</button>
+    </div>
+  </div>
+
+  <!-- Minimal Header -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="brand">
+        <span class="brand-title">SERVİS LİSTESİ</span>
+        <span class="live-status" id="live-indicator"><span class="live-dot"></span> Canlı</span>
+        <button type="button" class="header-refresh-btn" onclick="forceRefreshRoster()" title="Listeyi Güncelle">🔄</button>
+      </div>
+      <div class="clock" id="current-clock">--:--</div>
+    </div>
+
+    <!-- Date Bar & Controls -->
+    <div class="date-bar">
+      <div class="today-indicator">
+        <span class="today-badge" id="today-day-badge">GÜN</span>
+        <span class="selected-date-text" id="today-date-label">Yükleniyor...</span>
+      </div>
+      <label class="history-toggle" title="1 saati geçmiş vardiyaları göster/gizle">
+        <input type="checkbox" id="show-history-toggle" onchange="toggleHistoryView()" />
+        <span>Geçmişi Gör</span>
+      </label>
+    </div>
+  </header>
+
+  <!-- Main Roster Area -->
+  <main class="main-container" id="shifts-container">
+
+    <!-- 0. DÜN GECE VARDİYASI: 23:00 (23:00 Toplama Dün - 07:00 Dağıtım Bugün) -->
+    <section class="shift-block yesterday-shift-block" id="shift-block-yesterday-2300" data-shift-time="23:00">
+      <div class="shift-block-header">
+        <div class="shift-tag">
+          <span class="day-tag-pill yesterday-tag-pill" id="pill-yesterday">GÜN</span>
+          <span class="shift-date-label" id="shift-date-yesterday-2300"></span>
+        </div>
+        <div class="shift-header-right">
+          <span class="shift-time-indicator" id="status-yesterday-2300"></span>
+          <button type="button" class="shift-edit-btn" onclick="toggleShiftEditMode('shift-block-yesterday-2300')" title="Vardiyayı Düzenle">
+            <span class="edit-btn-icon">✏️</span> <span class="edit-btn-text">Düzenle</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="shift-columns">
+        <!-- 🟢 23:00 Toplama -->
+        <div class="column-box toplama-box">
+          <div class="column-header">
+            <span class="col-title toplama-title" id="title-yesterday-2300-toplama">🟢 23:00 Toplama</span>
+            <span class="col-count" id="count-yesterday-2300-toplama">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-yesterday-2300-toplama">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn toplama-btn" onclick="openNameSelector('yesterday', '23:00', 'toplama')">
+            + Ekle
+          </button>
+        </div>
+
+        <!-- 🟡 07:00 Dağıtım -->
+        <div class="column-box dagitim-box">
+          <div class="column-header">
+            <span class="col-title dagitim-title" id="title-yesterday-2300-dagitim">🟡 07:00 Dağıtım</span>
+            <span class="col-count" id="count-yesterday-2300-dagitim">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-yesterday-2300-dagitim">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn dagitim-btn" onclick="openNameSelector('today', '07:00', 'dagitim')">
+            + Ekle
+          </button>
+          <!-- ⚠️ Gelirken Toplanacak Uyarısı -->
+          <div class="pickup-reminder-alert" id="reminder-yesterday-2300" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. GÜN: 07:00 (07:00 Toplama - 15:00 Dağıtım) -->
+    <section class="shift-block" id="shift-block-today-0700" data-shift-time="07:00">
+      <div class="shift-block-header">
+        <div class="shift-tag">
+          <span class="day-tag-pill today-tag-pill pill-today">GÜN</span>
+          <span class="shift-date-label" id="shift-date-today-0700"></span>
+        </div>
+        <div class="shift-header-right">
+          <span class="shift-time-indicator" id="status-today-0700"></span>
+          <button type="button" class="shift-edit-btn" onclick="toggleShiftEditMode('shift-block-today-0700')" title="Vardiyayı Düzenle">
+            <span class="edit-btn-icon">✏️</span> <span class="edit-btn-text">Düzenle</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="shift-columns">
+        <!-- 🟢 07:00 Toplama -->
+        <div class="column-box toplama-box">
+          <div class="column-header">
+            <span class="col-title toplama-title">🟢 07:00 Toplama</span>
+            <span class="col-count" id="count-today-0700-toplama">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-today-0700-toplama">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn toplama-btn" onclick="openNameSelector('today', '07:00', 'toplama')">
+            + Ekle
+          </button>
+        </div>
+
+        <!-- 🟡 15:00 Dağıtım -->
+        <div class="column-box dagitim-box">
+          <div class="column-header">
+            <span class="col-title dagitim-title">🟡 15:00 Dağıtım</span>
+            <span class="col-count" id="count-today-0700-dagitim">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-today-0700-dagitim">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn dagitim-btn" onclick="openNameSelector('today', '15:00', 'dagitim')">
+            + Ekle
+          </button>
+          <!-- ⚠️ Gelirken Toplanacak Uyarısı -->
+          <div class="pickup-reminder-alert" id="reminder-today-0700" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. BUGÜN: 15:00 (15:00 Toplama - 23:00 Dağıtım) -->
+    <section class="shift-block" id="shift-block-today-1500" data-shift-time="15:00">
+      <div class="shift-block-header">
+        <div class="shift-tag">
+          <span class="day-tag-pill today-tag-pill pill-today">GÜN</span>
+          <span class="shift-date-label" id="shift-date-today-1500"></span>
+        </div>
+        <div class="shift-header-right">
+          <span class="shift-time-indicator" id="status-today-1500"></span>
+          <button type="button" class="shift-edit-btn" onclick="toggleShiftEditMode('shift-block-today-1500')" title="Vardiyayı Düzenle">
+            <span class="edit-btn-icon">✏️</span> <span class="edit-btn-text">Düzenle</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="shift-columns">
+        <!-- 🟢 15:00 Toplama -->
+        <div class="column-box toplama-box">
+          <div class="column-header">
+            <span class="col-title toplama-title">🟢 15:00 Toplama</span>
+            <span class="col-count" id="count-today-1500-toplama">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-today-1500-toplama">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn toplama-btn" onclick="openNameSelector('today', '15:00', 'toplama')">
+            + Ekle
+          </button>
+        </div>
+
+        <!-- 🟡 23:00 Dağıtım -->
+        <div class="column-box dagitim-box">
+          <div class="column-header">
+            <span class="col-title dagitim-title">🟡 23:00 Dağıtım</span>
+            <span class="col-count" id="count-today-1500-dagitim">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-today-1500-dagitim">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn dagitim-btn" onclick="openNameSelector('today', '23:00', 'dagitim')">
+            + Ekle
+          </button>
+          <!-- ⚠️ Gelirken Toplanacak Uyarısı -->
+          <div class="pickup-reminder-alert" id="reminder-today-1500" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. GÜN: 23:00 (23:00 Toplama - 07:00 Dağıtım) -->
+    <section class="shift-block" id="shift-block-today-2300" data-shift-time="23:00">
+      <div class="shift-block-header">
+        <div class="shift-tag">
+          <span class="day-tag-pill today-tag-pill pill-today">GÜN</span>
+          <span class="shift-date-label" id="shift-date-today-2300"></span>
+        </div>
+        <div class="shift-header-right">
+          <span class="shift-time-indicator" id="status-today-2300"></span>
+          <button type="button" class="shift-edit-btn" onclick="toggleShiftEditMode('shift-block-today-2300')" title="Vardiyayı Düzenle">
+            <span class="edit-btn-icon">✏️</span> <span class="edit-btn-text">Düzenle</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="shift-columns">
+        <!-- 🟢 23:00 Toplama -->
+        <div class="column-box toplama-box">
+          <div class="column-header">
+            <span class="col-title toplama-title" id="title-today-2300-toplama">🟢 23:00 Toplama</span>
+            <span class="col-count" id="count-today-2300-toplama">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-today-2300-toplama">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn toplama-btn" onclick="openNameSelector('today', '23:00', 'toplama')">
+            + Ekle
+          </button>
+        </div>
+
+        <!-- 🟡 07:00 Dağıtım -->
+        <div class="column-box dagitim-box">
+          <div class="column-header">
+            <span class="col-title dagitim-title" id="title-today-2300-dagitim">🟡 07:00 Dağıtım</span>
+            <span class="col-count" id="count-today-2300-dagitim">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-today-2300-dagitim">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn dagitim-btn" onclick="openNameSelector('tomorrow', '07:00', 'dagitim')">
+            + Ekle
+          </button>
+          <!-- ⚠️ Gelirken Toplanacak Uyarısı -->
+          <div class="pickup-reminder-alert" id="reminder-today-2300" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ERTESİ GÜN - VURGULU BÖLÜM -->
+    <!-- ============================================================ -->
+    <div class="tomorrow-mega-banner">
+      <div class="tomorrow-banner-main">
+        <span class="tomorrow-highlight-badge" id="tomorrow-badge-label">ERTESİ GÜN</span>
+        <span class="tomorrow-banner-title" id="tomorrow-banner-title">VARDİYALAR</span>
+      </div>
+      <div class="tomorrow-banner-date" id="tomorrow-date-label"></div>
+    </div>
+
+    <!-- 4. ERTESİ GÜN: 07:00 (07:00 Toplama - 15:00 Dağıtım) -->
+    <section class="shift-block tomorrow-shift-block" id="shift-block-tomorrow-0700">
+      <div class="shift-block-header">
+        <div class="shift-tag">
+          <span class="day-tag-pill tomorrow-tag-pill" id="pill-tomorrow">GÜN</span>
+          <span class="shift-date-label tomorrow-date-accent" id="shift-date-tomorrow-0700"></span>
+        </div>
+        <div class="shift-header-right">
+          <button type="button" class="shift-edit-btn" onclick="toggleShiftEditMode('shift-block-tomorrow-0700')" title="Vardiyayı Düzenle">
+            <span class="edit-btn-icon">✏️</span> <span class="edit-btn-text">Düzenle</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="shift-columns">
+        <!-- 🟢 07:00 Toplama -->
+        <div class="column-box toplama-box">
+          <div class="column-header">
+            <span class="col-title toplama-title">🟢 07:00 Toplama</span>
+            <span class="col-count" id="count-tomorrow-0700-toplama">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-tomorrow-0700-toplama">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn toplama-btn" onclick="openNameSelector('tomorrow', '07:00', 'toplama')">
+            + Ekle
+          </button>
+        </div>
+
+        <!-- 🟡 15:00 Dağıtım -->
+        <div class="column-box dagitim-box">
+          <div class="column-header">
+            <span class="col-title dagitim-title">🟡 15:00 Dağıtım</span>
+            <span class="col-count" id="count-tomorrow-0700-dagitim">0</span>
+          </div>
+          <div class="mini-passenger-list" id="list-tomorrow-0700-dagitim">
+            <div class="mini-empty">Kimse yok</div>
+          </div>
+          <button type="button" class="mini-add-btn dagitim-btn" onclick="openNameSelector('tomorrow', '15:00', 'dagitim')">
+            + Ekle
+          </button>
+          <!-- ⚠️ Gelirken Toplanacak Uyarısı -->
+          <div class="pickup-reminder-alert" id="reminder-tomorrow-0700" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Quick Utility Bar -->
+    <div class="utility-bar">
+      <button type="button" class="util-btn share-btn" onclick="copyWhatsAppList()">
+        <span class="material-symbols-outlined">content_copy</span>
+        <span>WhatsApp Listesi Kopyala</span>
+      </button>
+      <button type="button" class="util-btn settings-btn" onclick="openPersonnelModal()">
+        <span class="material-symbols-outlined">manage_accounts</span>
+        <span>Personeller</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- ================= MODALS & BOTTOM SHEETS ================= -->
+
+  <!-- 1. Name Selection Modal (For Passengers - Instant 1-Tap Add!) -->
+  <div class="modal-backdrop" id="name-modal" onclick="closeNameSelector(event)">
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      
+      <div class="sheet-header">
+        <div>
+          <h3 class="sheet-title" id="name-modal-title">İsim Seçin</h3>
+          <p class="sheet-subtitle" id="name-modal-sub">İsminize dokunarak listeye eklenin</p>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="closeNameSelector()">✕</button>
+      </div>
+
+      <!-- Personnel Chips Container -->
+      <div class="personnel-chips" id="personnel-chips-container">
+        <!-- Dynamically filled -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Driver Pickup Time Assignment Modal (Şoför Saat Ataması) -->
+  <div class="modal-backdrop" id="time-modal" onclick="closeTimeModal(event)">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <div class="dialog-header">
+        <h3>⏱️ Alınma Saati Belirle</h3>
+        <button type="button" class="sheet-close-btn" onclick="closeTimeModal()">✕</button>
+      </div>
+
+      <div class="dialog-body">
+        <p class="time-passenger-label">
+          Yolcu: <strong id="time-modal-passenger-name">--</strong>
+        </p>
+
+        <!-- Quick Time Buttons -->
+        <div class="time-presets" id="time-presets-container">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Custom Time Input -->
+        <div class="custom-time-form">
+          <label for="custom-time-input">Diğer Saat:</label>
+          <input type="time" id="custom-time-input" class="time-input" />
+          <button type="button" class="btn-primary" onclick="saveCustomTime()">Kaydet</button>
+        </div>
+
+        <div class="time-modal-actions">
+          <button type="button" class="btn-clear-time" onclick="clearPickupTime()">Saati Kaldır</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Personnel Directory & Management Modal -->
+  <div class="modal-backdrop" id="personnel-modal" onclick="closePersonnelModal(event)">
+    <div class="modal-sheet personnel-sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      
+      <div class="sheet-header personnel-sheet-header">
+        <div class="personnel-header-info">
+          <div class="personnel-title-row">
+            <span class="personnel-header-icon">👥</span>
+            <h3 class="sheet-title">Personel Rehberi & Yönetimi</h3>
+          </div>
+          <p class="sheet-subtitle" id="personnel-subtitle-count">Hızlı Arama • WhatsApp • Ekle / Düzenle / Sil</p>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="closePersonnelModal()">✕</button>
+      </div>
+
+      <!-- Quick Search Bar -->
+      <div class="personnel-search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="personnel-search-input" placeholder="Personel ara (isim veya tel)..." oninput="filterPersonnelList()" />
+        <button type="button" class="search-clear-btn" id="search-clear-btn" onclick="clearPersonnelSearch()">✕</button>
+      </div>
+
+      <!-- Add New Personnel Card -->
+      <div class="add-person-card">
+        <div class="add-person-card-header">
+          <span class="add-person-title">➕ Yeni Personel Ekle</span>
+        </div>
+        <div class="add-person-inputs">
+          <div class="input-with-icon">
+            <span class="input-icon">👤</span>
+            <input type="text" id="new-person-name" placeholder="Personel Adı Soyadı..." maxlength="30" />
+          </div>
+          <div class="input-with-icon">
+            <span class="input-icon">📱</span>
+            <input type="tel" id="new-person-phone" placeholder="Telefon (05xx xxx xx xx)..." maxlength="16" />
+          </div>
+          <button type="button" class="btn-add-person" onclick="addNewPerson()">
+            <span>+ Ekle</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Current Personnel List (Scrollable) -->
+      <div class="manage-personnel-list" id="manage-personnel-list">
+        <!-- Dynamically filled with rich cards -->
+      </div>
+
+      <!-- PWA Shortcut Option inside Personnel -->
+      <div class="personnel-pwa-footer">
+        <button type="button" class="btn-pwa-footer-install" onclick="triggerPwaInstall()">
+          <span>📲</span>
+          <span>Uygulamayı Telefona Ekle (Ana Ekran)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.1 Edit Personnel Modal (Güncelleme) -->
+  <div class="modal-backdrop" id="edit-personnel-modal" onclick="closeEditPersonnelModal(event)">
+    <div class="modal-dialog edit-person-dialog" onclick="event.stopPropagation()">
+      <div class="dialog-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">✏️</span>
+          <h3 style="font-size:17px; margin:0;">Personel Bilgilerini Düzenle</h3>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="closeEditPersonnelModal()">✕</button>
+      </div>
+
+      <div class="dialog-body">
+        <input type="hidden" id="edit-person-id" />
+        <input type="hidden" id="edit-person-original-name" />
+        
+        <div class="edit-form-group">
+          <label class="edit-form-label">Ad Soyad:</label>
+          <div class="input-with-icon">
+            <span class="input-icon">👤</span>
+            <input type="text" id="edit-person-name" class="modal-text-input" placeholder="Ad Soyad..." maxlength="30" />
+          </div>
+        </div>
+
+        <div class="edit-form-group">
+          <label class="edit-form-label">Telefon Numarası:</label>
+          <div class="input-with-icon">
+            <span class="input-icon">📱</span>
+            <input type="tel" id="edit-person-phone" class="modal-text-input" placeholder="05xx xxx xx xx" maxlength="16" />
+          </div>
+        </div>
+
+        <div class="edit-modal-actions">
+          <button type="button" class="edit-btn-cancel" onclick="closeEditPersonnelModal()">Vazgeç</button>
+          <button type="button" class="edit-btn-save" onclick="saveEditedPerson()">✓ Güncelle</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. WhatsApp Quick Message Modal -->
+  <div class="modal-backdrop" id="wa-modal" onclick="closeWaModal(event)">
+    <div class="modal-sheet wa-sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div class="sheet-header-title">
+          <span id="wa-modal-name" class="wa-target-name">Yolcu</span>
+          <span id="wa-modal-phone" class="wa-target-phone">05xx xxx xx xx</span>
+        </div>
+        <button type="button" class="sheet-close-btn" onclick="closeWaModal()">✕</button>
+      </div>
+
+      <div class="wa-options-container">
+        <div class="wa-section-title">Hızlı WhatsApp Mesajı Gönder:</div>
+        
+        <button type="button" class="wa-msg-btn" onclick="sendWaPreset('5 dk ya geliyorum.')">
+          <span class="wa-msg-icon">⏱️</span>
+          <div class="wa-msg-content">
+            <strong>"5 dk ya geliyorum."</strong>
+            <span>Yaklaşma bildirimi</span>
+          </div>
+        </button>
+
+        <button type="button" class="wa-msg-btn" onclick="sendWaPreset('Kapıdayım')">
+          <span class="wa-msg-icon">🚗</span>
+          <div class="wa-msg-content">
+            <strong>"Kapıdayım"</strong>
+            <span>Hızlı varış bildirimi</span>
+          </div>
+        </button>
+
+        <button type="button" class="wa-msg-btn" onclick="sendWaPreset('Biraz gecikeceğim')">
+          <span class="wa-msg-icon">⏳</span>
+          <div class="wa-msg-content">
+            <strong>"Biraz gecikeceğim"</strong>
+            <span>Gecikme uyarısı</span>
+          </div>
+        </button>
+
+        <button type="button" class="wa-msg-btn wa-msg-primary" onclick="sendWaPreset('')">
+          <span class="wa-msg-icon">💬</span>
+          <div class="wa-msg-content">
+            <strong>Diğer</strong>
+            <span>WhatsApp'ı aç ve kendi mesajını yaz</span>
+          </div>
+        </button>
+
+        <div class="wa-footer-actions">
+          <button type="button" class="wa-edit-phone-btn" onclick="promptEditPhone()">
+            ✏️ Telefon Numarasını Güncelle
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. PWA Install Guide Modal (for iOS and unsupported browsers) -->
+  <div class="modal-backdrop" id="pwa-guide-modal" onclick="closePwaGuideModal(event)">
+    <div class="modal-dialog pwa-guide-dialog" onclick="event.stopPropagation()">
+      <div class="dialog-header">
+        <h3>📲 Ana Ekrana Ekle</h3>
+        <button type="button" class="sheet-close-btn" onclick="closePwaGuideModal()">✕</button>
+      </div>
+      <div class="dialog-body">
+        <p class="guide-intro">Servis listesini telefonunuza tek dokunuşla açılacak bir uygulama gibi ekleyin:</p>
+        <div class="guide-steps" id="pwa-guide-steps">
+          <div class="guide-step">
+            <span class="step-num">1</span>
+            <div class="step-desc">
+              <strong>iPhone / iPad:</strong> Safari'nin altındaki <strong>Paylaş (<span class="ios-icon">⎋</span>)</strong> simgesine dokunun.<br>
+              <strong>Android:</strong> Sağ üstteki <strong>Üç Nokta (⋮)</strong> menüsüne dokunun.
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">2</span>
+            <div class="step-desc">
+              Menüden <strong>"Ana Ekrana Ekle"</strong> (veya <em>"Uygulamayı Yükle"</em>) seçeneğini seçin.
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">3</span>
+            <div class="step-desc">
+              Sağ üstteki <strong>"Ekle"</strong> butonuna basın. Uygulama artık ana ekranınızda bir mobil uygulama gibi yer alacak!
+            </div>
+          </div>
+        </div>
+        <div class="pwa-app-preview">
+          <img src="/icons/icon-192.png" alt="Telekom Servis" class="pwa-preview-icon" />
+          <div class="pwa-preview-name">Telekom Servis</div>
+        </div>
+        <button type="button" class="btn-primary btn-block" onclick="closePwaGuideModal()">Anladım</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Confirm Delete from Roster Modal -->
+  <div class="modal-backdrop" id="confirm-delete-modal" onclick="closeConfirmDeleteModal(event)">
+    <div class="modal-dialog confirm-dialog" onclick="event.stopPropagation()">
+      <div class="confirm-icon">⚠️</div>
+      <h3 class="confirm-title">Listeden Çıkarılsın mı?</h3>
+      <p class="confirm-text">
+        <strong id="confirm-delete-name">Yolcu</strong> listeden silinecek.<br>
+        Onaylıyor musunuz?
+      </p>
+      <div class="confirm-actions">
+        <button type="button" class="confirm-btn btn-cancel" onclick="closeConfirmDeleteModal()">Vazgeç</button>
+        <button type="button" class="confirm-btn btn-danger" id="confirm-delete-action-btn" onclick="executeDeleteFromRoster()">Evet, Çıkar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js?v=23"></script>
+</body>
+</html>
